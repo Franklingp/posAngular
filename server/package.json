@@ -1,0 +1,20 @@
+{
+  "name": "backendpos",
+  "version": "1.0.0",
+  "description": "Backend para un proyecto de POS desarrollado con Node JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Franklin Pimentel",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.5.13"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
