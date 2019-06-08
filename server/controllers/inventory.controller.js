@@ -46,6 +46,21 @@ var inventory = {
 			}
 			return res.status(200).send({Product: inventory});
 		});
+	},
+
+	//Metodo para retornar un solo producto de la base de datos
+	getProduct: function(req, res){
+		let id = req.params.id;
+
+		Product.findById(id, (error, product)=>{
+			if(error){
+				return res.status(500).send({message: "Ha ocurrido un error al intentar obtener el producto"});
+			}
+			if(!product){
+				return res.status(404).send({message: "No se ha podido encontrar el producto"});
+			}
+			return res.status(200).send({Product: product});
+		});
 	}
 };
 

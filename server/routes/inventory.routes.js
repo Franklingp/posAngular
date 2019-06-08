@@ -9,5 +9,6 @@ var inventoryController = require("../controllers/inventory.controller");
 router.get("/test", inventoryController.test);
 router.post("/add", inventoryController.addProduct);
 router.get("/get-inventory", inventoryController.getInventory);
+router.get("/get-product/:id", inventoryController.getProduct);
 
 module.exports = router;
