@@ -32,6 +32,20 @@ var inventory = {
 			}
 			return res.status(200).send({Product: productSave});
 		});
+	},
+
+	//Metodo para retornar el inventario completo de la base de datos
+	getInventory: function(req, res){
+
+		Product.find((error, inventory) => {
+			if(error){
+				return res.status(500).send({message: "Ha ocurrido un error al intentar obtener los datos del servidor"});
+			}
+			if(!inventory){
+				return res.status(404).send({message: "No se han podido encontrar los datos en el servidor"});
+			}
+			return res.status(200).send({Product: inventory});
+		});
 	}
 };
 
