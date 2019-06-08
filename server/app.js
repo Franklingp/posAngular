@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 //Rutas
-app.use("/api", inventoryRoutes);
+app.use("/api/inventory", inventoryRoutes);
 
 //Exportar
 

@@ -6,6 +6,7 @@ var router = express.Router();
 var inventoryController = require("../controllers/inventory.controller");
 
 //Rutas de Inventario
-router.get("/prueba", inventoryController.test);	
+router.get("/test", inventoryController.test);
+router.post("/add", inventoryController.addProduct);	
 
 module.exports = router;

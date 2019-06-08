@@ -10,6 +10,7 @@ var ProductModel = schema({
 	description: String,
 	category: String,
 	quantity: Number,
+	brand: String,
 	price: Number,
 	cost: Number,
 	enabled: Boolean
