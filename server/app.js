@@ -9,6 +9,7 @@ var app = express();
 //Archivos de rutas
 var inventoryRoutes = require('./routes/inventory.routes');
 var clientsRoutes = require('./routes/clients.routes');
+var registryRoutes = require('./routes/registry.routes')
 
 //Middlewares
 app.use(bodyParser.urlencoded({extended:false}));
@@ -27,6 +28,7 @@ app.use((req, res, next) => {
 //Rutas
 app.use("/api/inventory", inventoryRoutes);
 app.use("/api/clients", clientsRoutes);
+app.use("/api/registy", registryRoutes);
 
 //Exportar
 
