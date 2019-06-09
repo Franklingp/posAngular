@@ -57,6 +57,37 @@ var clientController = {
 			}
 			return res.status(200).send({Client: client});
 		});
+	},
+
+	// Metodo para actualizar los datos de un cliente en la base de datos
+	updateClient: function(req, res){
+		let id = req.params.id;
+		let update = req.body;
+
+		Client.findByIdAndUpdate(id, update, {new: true, useFindAndModify: false}, (error, updated) => {
+			if(error){
+				return res.status(500).send({message: "Ha ocurrido un error al intentar actualizar los datos"});
+			}
+			if(!updated){
+				return res.status(404).send({message: "No se ha encontrado el cliente en la base de datos"});
+			}
+			return res.status(200).send({Client: updated});
+		});
+	},
+
+	// Metodo par eliminar un cliente de la base de datos
+	deleteClient: function(req, res){
+		let id = req.params.id;
+
+		Client.findByIdAndRemove(id, {useFindAndModify: false} , (error, Deleted) => {
+			if(error){
+				return res.status(500).send({message: "Ha ocurrido un error al intentar eliminar el cliente"});
+			}
+			if(!Deleted){
+				return res.status(404).send({message: "No se ha podido encontrar el cliente para eliminar"});
+			}
+			return res.status(200).send({Client: Deleted});
+		});
 	}
 };
 

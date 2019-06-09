@@ -10,5 +10,7 @@ router.get("/test", clientController.test);
 router.get("/get", clientController.getDataBase);
 router.post("/add", clientController.addClient);
 router.get("/get/:id", clientController.getClient);
+router.put("/update/:id", clientController.updateClient);
+router.delete("/delete/:id", clientController.deleteClient);
 
 module.exports = router;
