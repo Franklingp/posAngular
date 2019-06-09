@@ -76,6 +76,22 @@ var inventory = {
 			}
 			return res.status(200).send({Product: productDeleted});
 		});
+	},
+
+	//Metodo para actualizar un producto de la base de datos
+	updateProduct: function(req, res){
+		let id = req.params.id;
+		let params = req.body;
+
+		Product.findByIdAndUpdate(id, params, {new: true, useFindAndModify: false}, (error, updated) => {
+			if(error){
+				return res.status(500).send({message: "Ha ocurrido un error al intentar actualizar el producto"});
+			}
+			if(!updated){
+				return res.status(404).send({message: "No se ha podido encontrar el producto a actualizar"});
+			}
+			return res.status(200).send({Product: updated});
+		});
 	}
 };
 
