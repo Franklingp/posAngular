@@ -1,7 +1,7 @@
 'use strict'
 
 // Rutas para los metodos del inventario
-var express = require('express');express
+var express = require('express');
 var router = express.Router();
 var inventoryController = require("../controllers/inventory.controller");
 
