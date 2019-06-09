@@ -61,6 +61,21 @@ var inventory = {
 			}
 			return res.status(200).send({Product: product});
 		});
+	},
+
+	//Metodo para eliminar un producto de la base de datos
+	deleteProduct: function(req, res){
+		let id = req.params.id;
+
+		Product.findByIdAndRemove(id,{useFindAndModify: false}, (error, productDeleted) => {
+			if(error){
+				return res.status(500).send({message: "Ha ocurrido un error al intentar eliminar el producto"});
+			}
+			if(!productDeleted){
+				return res.status(404).send({message: "No se ha podido encontrar el producto para eliminar"});
+			}
+			return res.status(200).send({Product: productDeleted});
+		});
 	}
 };
 
