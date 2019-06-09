@@ -42,6 +42,21 @@ var clientController = {
 			}
 			return res.status(200).send({Client: client});
 		});
+	},
+
+	//Metodo para obtener un cliente en especifico de la base de datos
+	getClient: function(req, res){
+		let id = req.params.id;
+
+		Client.findById(id, (error, client) =>{
+			if(error){
+				return res.status(500).send({message: "Ha ocurrido un error al intentar obtener los datos"});
+			}
+			if(!client){
+				return res.status(404).send({message: "No se ha encontrado el cliente en la base de datos"});
+			}
+			return res.status(200).send({Client: client});
+		});
 	}
 };
 

@@ -93,6 +93,27 @@ var inventory = {
 			return res.status(200).send({Product: updated});
 		});
 	}
+
+	/*
+	//Metodo para deshabilitar un producto en caso de no poder eliminarlo
+	unableProduct: function(req, res){
+		let id = req.params.id;
+		let update = new Product();
+		update.enabled = false;
+
+		console.log(update);
+
+		Product.findByIdAndUpdate(id, update, (error, unabled) => { // {new: true, useFindAndModify: false},
+			if(error){
+				return res.status(500).send({message: "Ha ocurrido un error al intentar inhabilitar el producto"});
+			}
+			if(!unabled){
+				return res.status(404).send({message: "No se ha podido encontrar el producto a inhabilitar"});
+			}
+			return res.status(200).send({Product: unabled});
+		});
+
+	} */
 };
 
 module.exports = inventory;

@@ -12,5 +12,6 @@ router.get("/get", inventoryController.getInventory);
 router.get("/get/:id", inventoryController.getProduct);
 router.delete("/delete/:id", inventoryController.deleteProduct);
 router.put("/update/:id", inventoryController.updateProduct);
+//router.put("/unable/:id", inventoryController.unableProduct);
 
 module.exports = router;
