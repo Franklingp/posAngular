@@ -7,12 +7,8 @@ var schema = mongoose.Schema;
 var registryModel = schema({
 	clientId: String,
 	date: String,
-	products: [
-		{
-			productId: String,
-			quantity: Number
-		}
-	],
+	products: Array,
+	quantity: Array,
 	total_price: Number
 });
 
