@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 //Rutas
 app.use("/api/inventory", inventoryRoutes);
 app.use("/api/clients", clientsRoutes);
-app.use("/api/registy", registryRoutes);
+app.use("/api/registry", registryRoutes);
 
 //Exportar
 

@@ -5,10 +5,12 @@ var mongoose = require("mongoose");
 var schema = mongoose.Schema;
 
 var registryModel = schema({
-	clientId: String,
-	date: String,
-	products: Array,
-	quantity: Array,
+	clientId: Object,
+	date: Date,
+	products:[
+		{productId: Object,
+		quiantity: Number}
+	],
 	total_price: Number
 });
 
