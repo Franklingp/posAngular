@@ -64,11 +64,11 @@ var registryController = {
 				return res.status(404).send({message: "No se ha podido encontrar el registro"});
 			}
 			//Coloco en posicion 0 el primer id para evitar errores
-			products[0] = registry.products[0].productId;
+			products[0] = registry.products[0].id;
 
 
 			//Metodo para retornar el cliente asociado a el registro
-			Client.findById(registry.clientId, (error, client) => {
+			Client.findById(registry.client.id, (error, client) => {
 				if(error){
 					return res.status(500).send({message: "Ha ocurrido un error al intentar actualizar el registro"});
 				}
@@ -81,7 +81,7 @@ var registryController = {
 				let quantityProducts = registry.products.length;
 				let index = 0;
 				while(index < quantityProducts){
-					products.push(registry.products[index].productId);
+					products.push(registry.products[index].id);
 					index ++;
 				}
 
@@ -94,15 +94,25 @@ var registryController = {
 						return res.status(404).send({message: "No se ha podido encontrar el registro"});
 					}
 					return res.status(200).send({Registry: registry, Client: client, Products: product});
-
-				});
-					
+				});	
 			});
-
-			
-
 		});
 
+	},
+
+	//Metodo para retornar todos los registros como listado
+	getAll: function(req, res){
+		Registry.find().sort("-date").exec((error, registry) => {
+			return validate(error, registry, res);
+		});
+	},
+
+	delete: function(req, res){
+		let id = req.params.id;
+
+		Registry.findByIdAndRemove(id, {useFindAndModify: false},(error, remove) =>{
+			return validate(error, remove, res);
+		});
 	}
 }
 
