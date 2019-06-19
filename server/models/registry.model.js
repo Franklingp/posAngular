@@ -17,7 +17,7 @@ var registryModel = schema({
 		name: String,
 		brand: String,
 		price: Number,
-		quiantity: Number}
+		quantity: Number}
 	],
 	total_price: Number
 });

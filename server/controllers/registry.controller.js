@@ -26,26 +26,121 @@ var registryController = {
 	//Metodo para agregar un nuevo registro
 	add: function(req, res){
 		let registry = new Registry();
-		let params = req.body;
+		//let params = req.body;
 
-		registry.clientId = params.clientId;
+		let params = {
+		    "products" : [ 
+		        {
+		            "id" : "5cfb1e87c1048721fce1fdb9",
+		            "name" : "Xbox One X",
+		            "brand" : "Microsoft",
+		            "price" : 500,
+		            "quantity" : 2
+		        }, 
+		        {
+		            "id" : "5cfb1e59c1048721fce1fdb8",
+		            "name" : "S10",
+		            "brand" : "Samsung",
+		            "price" : 500,
+		            "quantity" : 1
+		        }
+		    ],
+		    "client" : {
+		        "id" : "5cfd3442f418431bb488238d",
+		        "name" : "Gerafadrdo",
+		        "surname" : "Pifadfmentel",
+		        "identification" : 145234523
+		    },
+		    "date" : "2019-12-01T05:00:00.000Z",
+		    "total_price" : 700,
+		};
+
+		registry.client = params.client;
 		registry.date =	params.date;
 		registry.total_price = params.total_price;
-		
-		/*
-		let elements = params.products.length; 
+
+		let quantityProducts = params.products.length; 
 		let index = 0;
-		while(index < elements){
-			let product = params.products[index];
-			//registry.products.push(params.products[index]);
-			//console.log(product);
+		while(index < quantityProducts){
+			registry.products.push(params.products[index]);
 			index ++;
 		}
-		*/
-		//console.log(registry);
 
-		registry.save((error, success) => {
-			return validate(error, success, res);
+		registry.save((error, registrySaved) => {
+			if(error){
+				return res.status(500).send({message: "Ha ocurrido un error al intentar actualizar el registro"});
+			}
+			if(!registrySaved){
+				return res.status(404).send({message: "No se ha podido encontrar el registro"});
+			}
+			
+			//Seccion donde actualizo el inventario para restar los productos que se acaban de vender
+			// y agregar el id del registro
+			let productsId = [String];
+			index = 0;
+			//productsId[0] = params.products[0].id;
+			while(index < quantityProducts){
+				if(index == 0){
+					productsId[0] = params.products[0].id;
+					index++;
+					continue;
+				}
+				productsId.push(params.products[index].id);
+				index++;
+			}
+
+			//A continuacion se accede a base de datos para obtener un arreglo de productos para actualizar
+			Product.find({'_id' : {$in: productsId}}).exec((error, products) => {
+				if(error){
+					return res.status(500).send({message: "Ha ocurrido un error al intentar actualizar el registro"});
+				}
+				if(!products){
+					return res.status(404).send({message: "No se ha podido encontrar el registro"});
+				}
+
+				index = 0;
+				let indexB = 0;
+				while(index < quantityProducts){
+					while(indexB < quantityProducts){
+						if(products[index]._id == productsId[indexB]){
+							console.log(registrySaved.products[indexB].quantity);
+							products[index].quantity = products[index].quantity - registrySaved.products[indexB].quantity;
+							products[index].registryId.push(registrySaved._id);
+
+							products[index].save((error, succes) =>{
+								if(error){
+									return res.status(500).send({message: "Ha ocurrido un error al intentar actualizar el registro"});
+								}
+								if(!products){
+									return res.status(404).send({message: "No se ha podido encontrar el registro"});
+								}
+							});						
+							indexB = 0;
+							break;
+						}
+						indexB++;
+					}
+					index++;
+				}
+
+
+				//return res.status(200).send({Registry: registrySaved});
+			});
+
+			Client.findById(registrySaved.client.id, (error, client) =>{
+				if(error){
+					return res.status(500).send({message: "Ha ocurrido un error al intentar actualizar el registro"});
+				}
+				if(!registrySaved){
+					return res.status(404).send({message: "No se ha podido encontrar el registro"});
+				}
+				console.log(client);
+				client.registryId.push(registrySaved._id);
+				console.log(client);
+				client.save((error, success) => {
+					return validate(error, registrySaved, res);
+				});
+			});
 		});
 	},
 
@@ -107,6 +202,7 @@ var registryController = {
 		});
 	},
 
+	//Metodo para eliminar un registro en la base de datos;
 	delete: function(req, res){
 		let id = req.params.id;
 
