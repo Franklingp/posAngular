@@ -26,9 +26,9 @@ var registryController = {
 	//Metodo para agregar un nuevo registro
 	add: function(req, res){
 		let registry = new Registry();
-		//let params = req.body;
+		let params = req.body;
 
-		let params = {
+		/*let params = {
 		    "products" : [ 
 		        {
 		            "id" : "5cfb1e87c1048721fce1fdb9",
@@ -54,6 +54,7 @@ var registryController = {
 		    "date" : "2019-12-01T05:00:00.000Z",
 		    "total_price" : 700,
 		};
+		*/
 
 		registry.client = params.client;
 		registry.date =	params.date;
@@ -98,6 +99,8 @@ var registryController = {
 					return res.status(404).send({message: "No se ha podido encontrar el registro"});
 				}
 
+				//A Continuacion se realizan dos ciclos para recorrer los productos y agregarle el registro
+				//al igual que descontar la cantidad de productos del inventario
 				index = 0;
 				let indexB = 0;
 				while(index < quantityProducts){
@@ -122,11 +125,9 @@ var registryController = {
 					}
 					index++;
 				}
-
-
-				//return res.status(200).send({Registry: registrySaved});
 			});
 
+			//En la siguiente seccion se le agrega el id de registro al cliente.
 			Client.findById(registrySaved.client.id, (error, client) =>{
 				if(error){
 					return res.status(500).send({message: "Ha ocurrido un error al intentar actualizar el registro"});
@@ -134,9 +135,7 @@ var registryController = {
 				if(!registrySaved){
 					return res.status(404).send({message: "No se ha podido encontrar el registro"});
 				}
-				console.log(client);
 				client.registryId.push(registrySaved._id);
-				console.log(client);
 				client.save((error, success) => {
 					return validate(error, registrySaved, res);
 				});
