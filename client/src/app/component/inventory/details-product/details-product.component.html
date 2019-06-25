@@ -1,3 +1,20 @@
-<p>
-  details-product works!
-</p>
+<!--Seccion de detalles de los productos-->
+<br>
+<section class="jumbotron" *ngIf="success">
+	<h1>Detalles {{product.brand}} - {{product.name}}</h1>
+	<hr>
+
+	<ul>
+		<li> Nombre: {{product.name}}</li>
+		<li> Marca: {{product.brand}}</li>
+		<li> Descripcion: {{product.description}}</li>
+		<li> Precio: {{product.price}}</li>
+		<li> Categoria: {{product.category}}</li>
+		<li> Cantidad disponible: {{product.quantity}} </li>
+	</ul>
+
+	<hr>
+	<button type="button" class="btn btn-warning" [routerLink]="['/inventory/edit/', product._id]">Editar</button>
+	<button type="button" class="btn btn-danger">Deshablitar</button>
+
+</section>

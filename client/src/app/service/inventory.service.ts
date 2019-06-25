@@ -25,4 +25,10 @@ export class InventoryService {
 		let headers = new HttpHeaders().set("Content-Type", "application/json");
 		return this._http.post(this.url+"/add",product , {headers: headers});
 	}
+
+	//Metodo para obtener un solo producto de la base de datos
+	getProduct(id): Observable<any>{
+		let headers = new HttpHeaders().set("Content-Type", "application/json");
+		return this._http.get(this.url+"/get/"+id, {headers: headers});
+	}
 }
