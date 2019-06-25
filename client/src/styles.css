@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: -61px;
+}
+
+
+.alert {
+    padding: 0.50rem 1.25rem;
+}

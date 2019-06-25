@@ -1,0 +1,69 @@
+<!--Seccion para agregar un nuevo producto-->
+<br>
+<h1>Agregar un nuevo producto</h1>
+
+<form #newProduct="ngForm" (ngSubmit)="addProduct(product)">
+
+	<!--Seccion que retorna un mensaje de exito o de error-->
+	<div>
+		<div class="alert alert-success" *ngIf="success == 1" role="alert">
+			Se ha agregado el producto exitosamente, <a href="#" class="alert-link">Haz click aqui</a> para observar los detalles.
+		</div>
+
+		<div class="alert alert-danger" *ngIf="success == -1" role="alert">
+				No se ha podido guardar el nuevo produto, intentelo de nuevo
+		</div>
+	</div>
+
+	<!--Seccion donde se toman los datos el producto (formulario)-->
+	<div class="form-group">
+		<label for="name">Nombre</label>
+		<input type="text" class="form-control" name="name" placeholder="Nombre" #name="ngModel"
+		[(ngModel)]="product.name" required>
+		<div *ngIf="name.touched && !product.name" class="alert alert-danger" role="alert">
+			El nombre es requerido
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="brand">Marca</label>
+		<input type="text" class="form-control" name="brand" placeholder="Marca" #brand="ngModel" [(ngModel)]="product.brand" required>
+		<div *ngIf="brand.touched && !product.brand" class="alert alert-danger" role="alert">
+			La marca es requerida
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="category">Categoria</label>
+		<input type="text" class="form-control" name="category" placeholder="Categoria"  #category="ngModel" [(ngModel)]="product.category" required>
+		<div *ngIf="category.touched && !product.category" class="alert alert-danger" role="alert">
+			La categoria es requerida
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="quantity">Cantidad</label>
+		<input type="number" class="form-control" name="quantity" placeholder="Cantidad" #quantity="ngModel" [(ngModel)]="product.quantity" required>
+		<div *ngIf="quantity.touched && !product.quantity" class="alert alert-danger" role="alert">
+			La cantidad es requerida
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="price">Precio</label>
+		<input type="number" class="form-control" name="price" placeholder="Precio" #price="ngModel" [(ngModel)]="product.price" required>
+		<div *ngIf="price.touched && !product.price" class="alert alert-danger" role="alert">
+			El precio es requerido
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="description">Descripcion</label>
+		<textarea class="form-control" name="description" rows="3" #description="ngModel" [(ngModel)]="product.description" required></textarea>
+		<div *ngIf="description.touched && !product.description" class="alert alert-danger" role="alert">
+			La descripcion es requerida
+		</div>
+	</div>
+
+ 	<button type="submit" class="btn btn-primary" [disabled]="!newProduct.form.valid">Guardar</button>
+</form>
