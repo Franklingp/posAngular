@@ -12,11 +12,15 @@ export class DetailsProductComponent implements OnInit {
 	public id: string;
 	public product: ProductModel;
 	public success: boolean;
+  public edit: boolean;
+  public title: string
 
   constructor(	private _inventoryService: InventoryService,
   				private _route: ActivatedRoute,
 				private _router: Router) {
   	this.success = false;
+    this.edit = false;
+    this.title = "Detalles";
 	}
 
   ngOnInit() {

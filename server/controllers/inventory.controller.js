@@ -37,7 +37,7 @@ var inventory = {
 	//Metodo para retornar el inventario completo de la base de datos
 	getInventory: function(req, res){
 
-		Product.find((error, inventory) => {
+		Product.find().sort('name').exec((error, inventory) => {
 			if(error){
 				return res.status(500).send({message: "Ha ocurrido un error al intentar obtener los datos del servidor"});
 			}

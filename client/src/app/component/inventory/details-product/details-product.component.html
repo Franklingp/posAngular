@@ -1,20 +1,48 @@
 <!--Seccion de detalles de los productos-->
 <br>
 <section class="jumbotron" *ngIf="success">
-	<h1>Detalles {{product.brand}} - {{product.name}}</h1>
+	<h1>{{title}} {{product.brand}} - {{product.name}}</h1>
 	<hr>
 
 	<ul>
 		<li> Nombre: {{product.name}}</li>
 		<li> Marca: {{product.brand}}</li>
 		<li> Descripcion: {{product.description}}</li>
-		<li> Precio: {{product.price}}</li>
+		<li *ngIf="!edit"> Precio: {{product.price}}</li>
 		<li> Categoria: {{product.category}}</li>
-		<li> Cantidad disponible: {{product.quantity}} </li>
+		<li *ngIf="!edit"> Cantidad disponible: {{product.quantity}} </li>
 	</ul>
 
 	<hr>
-	<button type="button" class="btn btn-warning" [routerLink]="['/inventory/edit/', product._id]">Editar</button>
-	<button type="button" class="btn btn-danger">Deshablitar</button>
+
+	<!--Botones de editar y deshabilitar-->
+	<div *ngIf="!edit">
+		<button type="button" class="btn btn-warning" [routerLink]="['/inventory/edit/', product._id]">Editar</button>
+		<button type="button" class="btn btn-danger">Deshabilitar</button>
+	</div>
+
+	<!--Seccion donde se edita el precio y la cantidad de los productos-->
+	<div *ngIf="edit">
+
+		<div class="form-group">
+			<label for="quantity">Cantidad</label>
+			<input type="number" class="form-control" name="quantity" placeholder="Cantidad" #quantity="ngModel" [(ngModel)]="product.quantity" required>
+			<div *ngIf="quantity.touched && !product.quantity" class="alert alert-danger" role="alert">
+				La cantidad es requerida
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="price">Precio</label>
+			<input type="number" class="form-control" name="price" placeholder="Precio" #price="ngModel" [(ngModel)]="product.price" required>
+			<div *ngIf="price.touched && !product.price" class="alert alert-danger" role="alert">
+				El precio es requerido
+			</div>
+		</div>
+
+		<br>
+		<button type="button" class="btn btn-warning" [routerLink]="['/inventory/edit/', product._id]">Guardar</button>
+	</div>
+
 
 </section>
