@@ -14,13 +14,15 @@ export class EditProductComponent implements OnInit {
 	public success: boolean;
 	public edit: boolean;
 	public title: string;
+  public edited: boolean;
 
   constructor(	private _inventoryService: InventoryService,
   				private _route: ActivatedRoute,
   				private _router: Router	) { 
   	this.success = false;
   	this.edit = true;
-  	this.title = "Editar"
+  	this.title = "Editar";
+    this.edited = false;
   }
 
   ngOnInit() {
@@ -51,4 +53,20 @@ export class EditProductComponent implements OnInit {
   		}
   	);
   }
+
+  //Metodo para editar un producto
+  updateProduct(){    
+    this._inventoryService.updateProduct(this.product).subscribe(
+      response => {
+        console.log(response);
+        alert("El producto se ha actualizado correctamente");
+        this._router.navigate(["inventory/detail/"+this.id]);
+
+      },
+      error => {
+        console.log(<any>error);
+        alert("Ha ocurrido un error al intentar actualizar el producto");
+      }
+    );
+  } 
 }

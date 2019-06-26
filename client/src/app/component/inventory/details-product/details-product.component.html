@@ -21,27 +21,29 @@
 		<button type="button" class="btn btn-danger">Deshabilitar</button>
 	</div>
 
-	<!--Seccion donde se edita el precio y la cantidad de los productos-->
+	<!--Seccion donde se edita el precio y la cantidad de los productos en caso de que estes editando-->
 	<div *ngIf="edit">
 
-		<div class="form-group">
-			<label for="quantity">Cantidad</label>
-			<input type="number" class="form-control" name="quantity" placeholder="Cantidad" #quantity="ngModel" [(ngModel)]="product.quantity" required>
-			<div *ngIf="quantity.touched && !product.quantity" class="alert alert-danger" role="alert">
-				La cantidad es requerida
+		<form #newProduct="ngForm" (ngSubmit)="updateProduct()">
+			<div class="form-group">
+				<label for="quantity">Cantidad</label>
+				<input type="number" class="form-control" name="quantity" placeholder="Cantidad" #quantity="ngModel" [(ngModel)]="product.quantity" required>
+				<div *ngIf="quantity.touched && !product.quantity" class="alert alert-danger" role="alert">
+					La cantidad es requerida
+				</div>
 			</div>
-		</div>
 
-		<div class="form-group">
-			<label for="price">Precio</label>
-			<input type="number" class="form-control" name="price" placeholder="Precio" #price="ngModel" [(ngModel)]="product.price" required>
-			<div *ngIf="price.touched && !product.price" class="alert alert-danger" role="alert">
-				El precio es requerido
+			<div class="form-group">
+				<label for="price">Precio</label>
+				<input type="number" class="form-control" name="price" placeholder="Precio" #price="ngModel" [(ngModel)]="product.price" required>
+				<div *ngIf="price.touched && !product.price" class="alert alert-danger" role="alert">
+					El precio es requerido
+				</div>
 			</div>
-		</div>
 
-		<br>
-		<button type="button" class="btn btn-warning" [routerLink]="['/inventory/edit/', product._id]">Guardar</button>
+			<br>
+			<button type="submit" class="btn btn-warning" [disabled]="!newProduct.form.valid">Guardar</button>
+		</form>
 	</div>
 
 

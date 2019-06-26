@@ -7,7 +7,7 @@
 	<!--Seccion que retorna un mensaje de exito o de error-->
 	<div>
 		<div class="alert alert-success" *ngIf="success == 1" role="alert">
-			Se ha agregado el producto exitosamente, <a href="#" class="alert-link">Haz click aqui</a> para observar los detalles.
+			Se ha agregado el producto exitosamente, <a class="alert-link" [routerLink]="['/inventory/detail', id]">Haz click aqui</a> para observar los detalles.
 		</div>
 
 		<div class="alert alert-danger" *ngIf="success == -1" role="alert">

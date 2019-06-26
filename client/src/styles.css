@@ -11,3 +11,7 @@
 .alert {
     padding: 0.50rem 1.25rem;
 }
+
+.btn-danger{
+    margin-left: 10px;
+}

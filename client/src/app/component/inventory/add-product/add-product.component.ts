@@ -11,6 +11,7 @@ import { InventoryService } from '../../../service/inventory.service';
 export class AddProductComponent implements OnInit {
 	public product: ProductModel;
   public success: number;
+  public id: string;
 
   constructor(	private _inventoryService: InventoryService	) {
   	this.product = new ProductModel("","",null,"","",null,true,[""]);
@@ -26,6 +27,7 @@ export class AddProductComponent implements OnInit {
   		response => {
   			console.log(response);
         this.success = 1;
+        this.id = response.Product._id;
   		},
   		error => {
   			console.log(<any>error);
