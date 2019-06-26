@@ -11,6 +11,7 @@ import { AddProductComponent } from './component/inventory/add-product/add-produ
 import { GetInventoryComponent } from './component/inventory/get-inventory/get-inventory.component';
 import { DetailsProductComponent } from './component/inventory/details-product/details-product.component';
 import { EditProductComponent } from './component/inventory/edit-product/edit-product.component';
+import { DisabledProductsComponent } from './component/inventory/disabled-products/disabled-products.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EditProductComponent } from './component/inventory/edit-product/edit-pr
     AddProductComponent,
     GetInventoryComponent,
     DetailsProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    DisabledProductsComponent
   ],
   imports: [
     BrowserModule,

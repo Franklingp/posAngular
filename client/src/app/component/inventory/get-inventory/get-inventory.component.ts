@@ -11,7 +11,7 @@ import { ProductModel } from '../../../models/product.model';
 export class GetInventoryComponent implements OnInit {
 	public inventory: ProductModel[];
   public success: number;
-
+  
   constructor(	private _inventoryService: InventoryService	) { 
     this.success = 0;
   }

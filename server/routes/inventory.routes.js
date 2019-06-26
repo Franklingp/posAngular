@@ -12,6 +12,7 @@ router.get("/get", inventoryController.getInventory);
 router.get("/get/:id", inventoryController.getProduct);
 router.delete("/delete/:id", inventoryController.deleteProduct);
 router.put("/update/:id", inventoryController.updateProduct);
-//router.put("/unable/:id", inventoryController.unableProduct);
+router.put("/disable/:id", inventoryController.disableProduct);
+router.put("/enable/:id", inventoryController.enableProduct);
 
 module.exports = router;

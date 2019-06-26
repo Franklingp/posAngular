@@ -18,7 +18,7 @@
 	<!--Botones de editar y deshabilitar-->
 	<div *ngIf="!edit">
 		<button type="button" class="btn btn-warning" [routerLink]="['/inventory/edit/', product._id]">Editar</button>
-		<button type="button" class="btn btn-danger">Deshabilitar</button>
+		<button type="button" class="btn btn-danger" (click)="disableProduct()">Deshabilitar</button>
 	</div>
 
 	<!--Seccion donde se edita el precio y la cantidad de los productos en caso de que estes editando-->

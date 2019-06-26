@@ -51,4 +51,18 @@ export class DetailsProductComponent implements OnInit {
   		}
   	);
   }
+
+  //Metodo para deshabilitar un producto
+  disableProduct(){
+    this._inventoryService.updateEnabled(false, this.id).subscribe(
+      response => {
+        console.log(response);
+        alert("El producto se ha deshabilitado correctamente");
+        this._router.navigate(["inventory"]);
+      },
+      error => {
+        console.log(<any>error);
+      }
+    )
+  }
 }

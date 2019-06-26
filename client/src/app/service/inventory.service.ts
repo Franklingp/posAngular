@@ -39,4 +39,14 @@ export class InventoryService {
 		let headers = new HttpHeaders().set("Content-Type", "application/json");
 		return this._http.put(this.url+"/update/"+product._id, product, {headers: headers});
 	}
+
+	//Metodo para habilitar o inhabilitar un producto
+	updateEnabled(enabled, id): Observable<any>{
+		let headers = new HttpHeaders().set("Content-Type", "application/json");
+		if(enabled){
+			return this._http.put(this.url+"/enable/"+id, {headers: headers});
+		}else{
+			return this._http.put(this.url+"/disable/"+id, {headers: headers});
+		}
+	}
 }
