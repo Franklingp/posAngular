@@ -16,10 +16,15 @@
 	<hr>
 
 	<!--Botones de editar y deshabilitar-->
-	<div *ngIf="!edit">
+	<div *ngIf="!edit && enable">
 		<button type="button" class="btn btn-warning" [routerLink]="['/inventory/edit/', product._id]">Editar</button>
 		<button type="button" class="btn btn-danger" (click)="disableProduct()">Deshabilitar</button>
 	</div>
+
+
+	<!--Seccion de botones en caso de que-->
+	<button *ngIf="!edit && !enable" type="button" class="btn btn-warning" (click)="enableProduct()">Habilitar producto</button>
+
 
 	<!--Seccion donde se edita el precio y la cantidad de los productos en caso de que estes editando-->
 	<div *ngIf="edit">

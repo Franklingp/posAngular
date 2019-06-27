@@ -11,9 +11,11 @@ import { ProductModel } from '../../../models/product.model';
 export class GetInventoryComponent implements OnInit {
 	public inventory: ProductModel[];
   public success: number;
+  public title: string;
   
   constructor(	private _inventoryService: InventoryService	) { 
     this.success = 0;
+    this.title = "Inventario";
   }
 
   ngOnInit() {
@@ -25,6 +27,7 @@ export class GetInventoryComponent implements OnInit {
   	this._inventoryService.getInventory().subscribe(
   		response => {
         this.inventory = response.Product;
+        this.success = 1;
   			console.log(this.inventory);
   			},
   		error =>{

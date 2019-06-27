@@ -14,6 +14,7 @@ export class DetailsProductComponent implements OnInit {
 	public success: boolean;
   public edit: boolean;
   public title: string
+  public enable: boolean;
 
   constructor(	private _inventoryService: InventoryService,
   				private _route: ActivatedRoute,
@@ -44,6 +45,7 @@ export class DetailsProductComponent implements OnInit {
   		response => {
   			this.product = response.Product;
   			this.success = true;
+        this.enable = response.Product.enabled;
   			console.log(this.product);
   		},
   		error =>{
@@ -64,5 +66,20 @@ export class DetailsProductComponent implements OnInit {
         console.log(<any>error);
       }
     )
+  }
+
+  //Metodo para habilitar un producto en caso de que este deshabilitado
+  enableProduct(){
+    this._inventoryService.updateEnabled(true, this.id).subscribe(
+      response => {
+        console.log(response);
+        alert("El producto se ha habilitado correctamente");
+        //this._router.navigate(["inventory/detail/"+this.id]);
+        location.reload();
+      },
+      error => {
+        console.log(<any>error);
+      }
+    );
   }
 }

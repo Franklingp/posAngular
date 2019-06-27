@@ -8,7 +8,7 @@ var inventoryController = require("../controllers/inventory.controller");
 //Rutas de Inventario
 router.get("/test", inventoryController.test);
 router.post("/add", inventoryController.addProduct);
-router.get("/get", inventoryController.getInventory);
+router.get("/obtain/:enable", inventoryController.getInventory);
 router.get("/get/:id", inventoryController.getProduct);
 router.delete("/delete/:id", inventoryController.deleteProduct);
 router.put("/update/:id", inventoryController.updateProduct);

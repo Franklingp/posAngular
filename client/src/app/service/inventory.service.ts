@@ -15,10 +15,16 @@ export class InventoryService {
 		this.url = Global.url+"/inventory";
 	}
 
-	//Metodo para retornar todo el inventario del servidor
+	//Metodo para retornar todo el inventario activo del servidor
 	getInventory(): Observable<any>{
 	  	let headers = new HttpHeaders().set("Content-Type", "application/json");
-	  	return this._http.get(this.url+"/get", {headers: headers});
+	  	return this._http.get(this.url+"/obtain/true", {headers: headers});
+	}
+
+	//Metodo para obtener los productos deshabilitados del inventario
+	getDisabledProducts(): Observable<any>{
+		let headers = new HttpHeaders().set("Content-Type", "application/json");
+		return this._http.get(this.url+"/obtain/false", {headers: headers});
 	}
 
 	//Metodo para guardar un nuevo producto
