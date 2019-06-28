@@ -7,13 +7,22 @@ import { EditProductComponent } from './component/inventory/edit-product/edit-pr
 import { DetailsProductComponent } from './component/inventory/details-product/details-product.component';
 import { DisabledProductsComponent } from './component/inventory/disabled-products/disabled-products.component';
 
+import { GetClientsComponent } from './component/clients/get-clients/get-clients.component';
+import { AddClientComponent } from './component/clients/add-client/add-client.component';
+import { DetailsClientComponent } from './component/clients/details-client/details-client.component';
+
 const routes: Routes = [
-	//inventory
+	//inventaro
 	{path: "inventory", component: GetInventoryComponent},
 	{path: "inventory/add", component: AddProductComponent},
 	{path: "inventory/edit/:id", component: EditProductComponent},
 	{path: "inventory/detail/:id", component: DetailsProductComponent},
-	{path: "inventory/disabled", component: DisabledProductsComponent}
+	{path: "inventory/disabled", component: DisabledProductsComponent},
+
+	//clientes
+	{path: "clients", component: GetClientsComponent},
+	{path: "clients/add", component: AddClientComponent},
+	{path: "clients/details/:id", component: DetailsClientComponent}
 ];
 
 @NgModule({

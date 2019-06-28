@@ -12,6 +12,9 @@ import { GetInventoryComponent } from './component/inventory/get-inventory/get-i
 import { DetailsProductComponent } from './component/inventory/details-product/details-product.component';
 import { EditProductComponent } from './component/inventory/edit-product/edit-product.component';
 import { DisabledProductsComponent } from './component/inventory/disabled-products/disabled-products.component';
+import { GetClientsComponent } from './component/clients/get-clients/get-clients.component';
+import { AddClientComponent } from './component/clients/add-client/add-client.component';
+import { DetailsClientComponent } from './component/clients/details-client/details-client.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { DisabledProductsComponent } from './component/inventory/disabled-produc
     GetInventoryComponent,
     DetailsProductComponent,
     EditProductComponent,
-    DisabledProductsComponent
+    DisabledProductsComponent,
+    GetClientsComponent,
+    AddClientComponent,
+    DetailsClientComponent
   ],
   imports: [
     BrowserModule,
