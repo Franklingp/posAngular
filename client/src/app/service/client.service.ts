@@ -28,6 +28,7 @@ export class ClientService {
   //Metodo para obtener un solo cliente del servidor
   getOne(id): Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.get(this.url+"get/"+id, {headers: headers});
+    return this._http.get(this.url+"/get/"+id, {headers: headers});
   }
+
 }

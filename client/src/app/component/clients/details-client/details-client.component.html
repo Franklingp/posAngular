@@ -1,3 +1,15 @@
-<p>
-  details-client works!
-</p>
+<br>
+
+<section class="jumbotron" *ngIf="success">
+
+	<h1>Detalles de {{client.name}} {{client.surname}}</h1>
+	<hr>
+	<ul>
+		<li>Nombre: {{client.name}}</li>
+		<li *ngIf="!client.company">Apellido: {{client.surname}}</li>
+		<li>Identificacion: {{client.identification}}</li>
+		<li *ngIf="client.company">Compañia</li>
+		<li *ngIf="!client.company">Persona natural</li>
+	</ul>
+
+</section>

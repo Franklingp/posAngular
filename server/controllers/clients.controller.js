@@ -11,7 +11,7 @@ var clientController = {
 
 	//Metodo para obtener la base de datos de los clientes
 	getDataBase: function(req, res){
-		Client.find((error, clients) => {
+		Client.find().sort('name').exec((error, clients) => {
 			if(error){
 				return res.status(500).send({message: "Ha ocurrido un error al intentar obtener la base de datos"});
 			}
