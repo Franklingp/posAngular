@@ -24,7 +24,7 @@
 			<td><a  [routerLink]="['/clients/details/', client._id]">{{client.name}}</a></td>
 			<td>{{client.surname}}</td>
 			<td>{{client.identification}}</td>
-			<td *ngIf="client.company">Compania</td>
+			<td *ngIf="client.company">Compañia</td>
 			<td *ngIf="!client.company">Persona natural</td>
 		</tr>
 	</tbody>

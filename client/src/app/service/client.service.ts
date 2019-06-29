@@ -31,4 +31,10 @@ export class ClientService {
     return this._http.get(this.url+"/get/"+id, {headers: headers});
   }
 
+  //Metodo para agregar un nuevo cliente a la base de datos
+  addClient(client): Observable<any>{
+    let headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this._http.post(this.url+"/add", client, {headers: headers});
+  }
+
 }
