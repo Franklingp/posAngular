@@ -4,7 +4,11 @@
 	<br>
 	<h1>{{title}}</h1>
 
-	<form #newClient="ngForm" (ngSubmit)="onSubmit()">
+	<div class="alert alert-success" *ngIf="success == 1" role="alert">
+	  Se ha registrado un nuevo cliente exitosamente.<a [routerLink]="['/clients/details/', newId]" class="alert-link">Haga click aqui</a> para ver los detalles.
+	</div>
+
+	<form #newClient="ngForm" (ngSubmit)="onSubmit(client.company)">
 
 		<div class="form-group">
 			<label for="name">Nombre</label>

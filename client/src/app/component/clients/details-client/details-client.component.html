@@ -12,4 +12,7 @@
 		<li *ngIf="!client.company">Persona natural</li>
 	</ul>
 
+	<hr>
+	<button type="button" class="btn btn-warning" [routerLink]="['/clients/edit/', id]">Editar</button>
+
 </section>

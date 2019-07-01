@@ -37,4 +37,9 @@ export class ClientService {
     return this._http.post(this.url+"/add", client, {headers: headers});
   }
 
+  //Metodo para actualizar un cliente
+  updateClient(client): Observable<any>{
+    let headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this._http.put(this.url+"/update/"+client._id, client, {headers: headers});
+  }
 }

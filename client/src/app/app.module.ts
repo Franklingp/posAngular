@@ -15,6 +15,7 @@ import { DisabledProductsComponent } from './component/inventory/disabled-produc
 import { GetClientsComponent } from './component/clients/get-clients/get-clients.component';
 import { AddClientComponent } from './component/clients/add-client/add-client.component';
 import { DetailsClientComponent } from './component/clients/details-client/details-client.component';
+import { EditClientComponent } from './component/clients/edit-client/edit-client.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DetailsClientComponent } from './component/clients/details-client/detai
     DisabledProductsComponent,
     GetClientsComponent,
     AddClientComponent,
-    DetailsClientComponent
+    DetailsClientComponent,
+    EditClientComponent
   ],
   imports: [
     BrowserModule,
