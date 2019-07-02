@@ -12,6 +12,10 @@ import { AddClientComponent } from './component/clients/add-client/add-client.co
 import { DetailsClientComponent } from './component/clients/details-client/details-client.component';
 import { EditClientComponent } from './component/clients/edit-client/edit-client.component';
 
+import { GetRegistryComponent } from './component/registry/get-registry/get-registry.component';
+import { AddRegistryComponent } from './component/registry/add-registry/add-registry.component';
+import { DetailRegistryComponent } from './component/registry/detail-registry/detail-registry.component';
+
 const routes: Routes = [
 	//inventaro
 	{path: "inventory", component: GetInventoryComponent},
@@ -24,7 +28,12 @@ const routes: Routes = [
 	{path: "clients", component: GetClientsComponent},
 	{path: "clients/add", component: AddClientComponent},
 	{path: "clients/details/:id", component: DetailsClientComponent},
-	{path: "clients/edit/:id", component: EditClientComponent}
+	{path: "clients/edit/:id", component: EditClientComponent},
+
+	//registro
+	{path: "registry", component: GetRegistryComponent},
+	{path: "registry/add", component: AddRegistryComponent},
+	{path: "registry/detail/:id", component: DetailRegistryComponent}
 ];
 
 @NgModule({

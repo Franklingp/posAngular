@@ -16,6 +16,9 @@ import { GetClientsComponent } from './component/clients/get-clients/get-clients
 import { AddClientComponent } from './component/clients/add-client/add-client.component';
 import { DetailsClientComponent } from './component/clients/details-client/details-client.component';
 import { EditClientComponent } from './component/clients/edit-client/edit-client.component';
+import { GetRegistryComponent } from './component/registry/get-registry/get-registry.component';
+import { DetailRegistryComponent } from './component/registry/detail-registry/detail-registry.component';
+import { AddRegistryComponent } from './component/registry/add-registry/add-registry.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { EditClientComponent } from './component/clients/edit-client/edit-client
     GetClientsComponent,
     AddClientComponent,
     DetailsClientComponent,
-    EditClientComponent
+    EditClientComponent,
+    GetRegistryComponent,
+    DetailRegistryComponent,
+    AddRegistryComponent
   ],
   imports: [
     BrowserModule,

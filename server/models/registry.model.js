@@ -9,7 +9,7 @@ var registryModel = schema({
 		id: Object,
 		name: String,
 		surname: String,
-		Identification: Number,
+		identification: Number		//Identification
 	},
 	date: Date,
 	products:[
