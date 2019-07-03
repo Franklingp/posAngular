@@ -13,9 +13,21 @@ export class RegistryService {
   	this.url = Global.url+"/registry";
   }
 
-  //Metodo de prueba de registro
+  //Metodo de prueba de registro.
   test(): Observable<any>{
   	let headers = new HttpHeaders().set("Content-Type", "application/json");
   	return this._http.get(this.url+"/test", {headers: headers});
+  }
+
+  //Metodo para obtener el listado completo del registro.
+  getRegistry(): Observable<any>{
+  	let headers = new HttpHeaders().set("Content-Type", "application/json");
+  	return this._http.get(this.url+"/get", {headers: headers});
+  }
+
+  //Metodo para obtener solo un registro de la base de datos
+  getOne(id): Observable<any>{
+    let headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this._http.get(this.url+"/get/"+id, {headers: headers});
   }
 }

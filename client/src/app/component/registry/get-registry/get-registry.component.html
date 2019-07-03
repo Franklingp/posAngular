@@ -1,3 +1,37 @@
-<p>
-  get-registry works!
-</p>
+<!-- Seccion para mostrar los registros de las ventas en pantalla-->
+<section>
+	<br>
+	<h1>Lista de ventas registradas</h1>
+	<hr>
+
+	<div class="list-group" *ngIf="success">
+		<div *ngFor="let purchase of registry">
+			<a data-toggle="collapse" href="#a{{purchase._id}}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+		    {{purchase.client.name}} {{purchase.client.surname}} - {{purchase.client.identification}}
+		    <span class="badge badge-success">{{purchase.date}}</span>
+		    <span class="badge badge-primary badge-pill">{{purchase.products.length}}</span>
+		 	</a>
+
+		  <div class="collapse" id="a{{purchase._id}}">
+			  <div class="card card-body jumbotron">
+			    <ul *ngFor="let product of purchase.products">
+			    	<li>{{product.name}} - {{product.brand}}
+			    		<ul>
+			    			<li>Cantidad: {{product.quantity}}
+			    			</li>
+		    				<li>Precio: {{product.price}}
+		    				</li>
+		    			</ul>
+			    	</li>
+			    	<hr>
+			    </ul>
+			    <span>Precio total: {{purchase.total_price}}</span>
+				<a class="btn btn-primary" [routerLink]="['/registry/detail/', purchase._id]" role="button">Ver Detalles</a>
+			  </div>
+			</div>
+
+		</div>
+	</div>
+
+</section>
+

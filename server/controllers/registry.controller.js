@@ -14,7 +14,7 @@ function validate(error, success, res){
 	if(!success){
 		return res.status(404).send({message: "No se ha podido encontrar el registro"});
 	}
-	return res.status(200).send({Registy: success});
+	return res.status(200).send({Registry: success});
 }
 
 var registryController = {

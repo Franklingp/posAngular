@@ -17,6 +17,7 @@ export class GetRegistryComponent implements OnInit {
 
   ngOnInit() {
   	this.test();
+    this.getRegistry();
   }
 
   //Metodo de prueba para servidor
@@ -33,6 +34,15 @@ export class GetRegistryComponent implements OnInit {
 
   //Metodo para obtener el registro completo
   getRegistry(){
-
+    this._registryService.getRegistry().subscribe(
+      response => {
+        this.registry = response.Registry;
+        console.log(this.registry);
+        this.success = true;
+      },
+      error => {
+        console.log(<any>error);
+      }
+    )
   }
 }

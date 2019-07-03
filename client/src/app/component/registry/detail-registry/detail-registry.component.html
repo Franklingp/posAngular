@@ -1,3 +1,64 @@
-<p>
-  detail-registry works!
-</p>
+<section>
+	<br>
+	<h1>Detalles de registro</h1>
+	<hr>
+
+	<h2>Fecha: {{registry.date}}</h2>
+	<h2>Costo total: {{registry.total_price}}</h2>
+	
+	<div *ngIf="success" class="jumbotron">
+		<h2>Detalles del cliente</h2>
+		<hr>
+		<ul>
+			<li>Nombre: {{client.name}}</li>
+			<li *ngIf="!client.company">Apellido: {{client.surname}}</li>
+			<li>Identificacion: {{client.identification}}</li>
+			<li *ngIf="client.company">Compañia</li>
+			<li *ngIf="!client.company">Persona natural</li>
+		</ul>
+		<a class="btn btn-primary" [routerLink]="['/clients/details/', client._id]" role="button">Ver detalles de cliente</a>
+	</div>
+
+	
+	<div *ngIf="success" class="jumbotron">
+		<h2>Productos adquiridos</h2>
+		<hr>
+
+		<div class="card" *ngFor="let product of products; let indice = index">
+		  <div class="card-header">
+		    <h3>{{product.brand}} - {{product.name}}</h3>
+		  </div>
+		  <div class="card-body">
+		    
+		    	<ul class="card-text">
+				<li> Nombre: {{product.name}}</li>
+				<li> Marca: {{product.brand}}</li>
+				<li> Categoria: {{product.category}}</li>
+				<li> Descripcion: {{product.description}}</li>
+				<hr>
+				<li> Precio facturado: {{registry.products[indice].price}}</li>
+				<li>Cantidades adquiridas: {{registry.products[indice].quantity}}</li>
+				</ul>
+		
+		    <a [routerLink]="['/inventory/detail/', product._id]" class="btn btn-primary">Ir a detalles de producto</a>
+		  </div>
+		</div>
+		
+	</div>
+
+</section>
+
+
+<!--<div *ngFor="let product of products">
+			<h1>{{product.brand}} - {{product.name}}</h1>
+			<hr>
+
+			<ul>
+				<li> Nombre: {{product.name}}</li>
+				<li> Marca: {{product.brand}}</li>
+				<li> Descripcion: {{product.description}}</li>
+				<li *ngIf="!edit"> Precio: {{product.price}}</li>
+				<li> Categoria: {{product.category}}</li>
+				<li *ngIf="!edit"> Cantidad disponible: {{product.quantity}} </li>
+			</ul>
+		</div>-->
