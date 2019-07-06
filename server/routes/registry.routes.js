@@ -7,9 +7,10 @@ var router = express.Router();
 var registryController = require("../controllers/registry.controller");
 
 router.get("/test", registryController.test);
-router.post("/add", registryController.add);		//No listo
+router.post("/add", registryController.add);		
 router.get("/get/:id", registryController.getRegistry);
 router.get("/get", registryController.getAll);
 router.delete("/delete/:id", registryController.delete);
+router.get("/get-set", registryController.getSet);
 
 module.exports = router;

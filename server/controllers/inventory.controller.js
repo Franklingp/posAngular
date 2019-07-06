@@ -3,6 +3,20 @@
 // Controlador para CRUD de inventario
 var Product = require('../models/product.model');
 
+//Funsion para validar y retornar una respuesta
+function validate(error,success, res){
+	if(error){
+		return res.status(500).send({message: 'Ha ocurrido un error al intentar obtener el producto'});
+	}
+	if(!success){
+		return res.status(404).send({message: 'No se ha encontrado el producto'});
+	}
+	if(success.length == 0){
+		return res.status(404).send({message: 'No se ha encontrado el producto'});
+	}
+	return res.status(200).send({Product: success});
+}
+
 var inventory = {
 	//Metodo de prueba
 	test: function(req, res){
@@ -126,6 +140,35 @@ var inventory = {
 			}
 			return res.status(200).send({Product: enabled});
 		});
+	},
+
+	//Metodo para obtener un producto en una busqueda personalizada
+	//Recibe un json {key: "seccion del producto", value: "Valor que se busca"}
+	getProductBy: function(req, res){
+		let params = {
+			key: String,
+			value: String
+		};
+
+		params.key = req.body.key;
+		params.value = req.body.value;
+
+
+		if(params.key == 'name'){
+			Product.find({'name': params.value}).sort('name').exec((error, products) => {
+				return validate(error, products, res);
+			});
+		}
+		if(params.key == 'brand'){
+			Product.find({'brand': params.value}).sort('name').exec((error, products) => {
+				return validate(error, products, res);
+			});
+		}
+		if(params.key == 'category'){
+			Product.find({'category': params.value}).sort('name').exec((error, products) => {
+				return validate(error, products, res);
+			});
+		}
 	}
 };
 

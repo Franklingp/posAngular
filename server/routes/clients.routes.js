@@ -12,5 +12,6 @@ router.post("/add", clientController.addClient);
 router.get("/get/:id", clientController.getClient);
 router.put("/update/:id", clientController.updateClient);
 router.delete("/delete/:id", clientController.deleteClient);
+router.get("/get-by", clientController.getClientBy);
 
 module.exports = router;

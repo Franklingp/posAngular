@@ -14,6 +14,9 @@ function validate(error, success, res){
 	if(!success){
 		return res.status(404).send({message: "No se ha podido encontrar el registro"});
 	}
+	if(success.length == 0){
+		return res.status(404).send({message: "No se ha podido encontrar el registro"});
+	}
 	return res.status(200).send({Registry: success});
 }
 
@@ -207,6 +210,23 @@ var registryController = {
 
 		Registry.findByIdAndRemove(id, {useFindAndModify: false},(error, remove) =>{
 			return validate(error, remove, res);
+		});
+	},
+
+	//Metodo para obtener un conjunto de registros en particular por id
+	//Recoge un arreglo de ids de registros
+	getSet: function(req, res){
+		let registry = [String];
+		//registry = req.body.registry;
+
+		registry = [
+                "5d045c8e376523240c0666ce",
+                "5d09b2714534641ae1ac52d8",
+                "5d09b45f3f69cb1b7a334d8b"
+            ];
+
+		Registry.find({'_id': {$in: registry}}).sort("-date").exec((error, success) => {
+			return validate(error, success, res);
 		});
 	}
 }

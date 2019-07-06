@@ -88,6 +88,43 @@ var clientController = {
 			}
 			return res.status(200).send({Client: Deleted});
 		});
+	},
+
+	//Metodo para obtener un cliente mediante una clave (nombre, identificacion, etc)
+	// Recibe un JSON {key: "clave en donde buscar", value: "Valor a buscar", type: "numero o string"}
+	getClientBy: function(req, res){
+		let params = {
+			key: String,
+			value: String
+		};
+
+		params.key = req.body.key;
+		params.value = req.body.value;
+
+		if(params.key == 'name'){
+			Client.find({'name': params.value}).sort('name').exec((error, clients) => {
+			if(error){
+				return res.status(500).send({message: "Ha ocurrido un error al intentar obtener el cliente"});
+			}
+			if(!clients){
+				return res.status(404).send({message: "No se ha podido encontrar el cliente"});
+			}
+			return res.status(200).send({Client: clients});
+			});
+		}
+
+		if(params.key == 'identification'){
+
+			Client.find({'identification': params.value}).sort('name').exec((error, clients) => {
+			if(error){
+				return res.status(500).send({message: "Ha ocurrido un error al intentar obtener el cliente"});
+			}
+			if(!clients){
+				return res.status(404).send({message: "No se ha podido encontrar el cliente"});
+			}
+			return res.status(200).send({Client: clients});
+			});
+		}
 	}
 };
 
