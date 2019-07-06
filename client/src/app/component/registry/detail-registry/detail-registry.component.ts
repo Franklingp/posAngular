@@ -17,6 +17,7 @@ export class DetailRegistryComponent implements OnInit {
 	public client: ClientModel;
 	public registry: RegistryModel;
 	public products: [ProductModel];
+	
 
   constructor(	private _registryService: RegistryService,
   				private _route: ActivatedRoute	) {
