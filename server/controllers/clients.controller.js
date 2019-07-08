@@ -91,7 +91,7 @@ var clientController = {
 	},
 
 	//Metodo para obtener un cliente mediante una clave (nombre, identificacion, etc)
-	// Recibe un JSON {key: "clave en donde buscar", value: "Valor a buscar", type: "numero o string"}
+	// Recibe un JSON {key: "clave en donde buscar", value: "Valor a buscar"}
 	getClientBy: function(req, res){
 		let params = {
 			key: String,

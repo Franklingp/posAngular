@@ -42,4 +42,10 @@ export class ClientService {
     let headers = new HttpHeaders().set("Content-Type", "application/json");
     return this._http.put(this.url+"/update/"+client._id, client, {headers: headers});
   }
+
+  //Metodo para obtener cliente mediante nombre o identificacion
+  getBy(client){
+    let headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this._http.post(this.url+"/get-by", client, {headers: headers});
+  }
 }

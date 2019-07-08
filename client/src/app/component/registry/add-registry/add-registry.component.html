@@ -1,3 +1,53 @@
-<p>
-  add-registry works!
-</p>
+<!--Seccion de compras-->
+
+<section>
+	<br>
+	<h1>Registrar Venta</h1>
+	<hr>
+
+	<!--Seccion para buscar el cliente-->
+	<br>
+	
+	<form *ngIf="success_client == false" #clientForm="ngForm" (ngSubmit)="getClient()">
+		<h2>Cliente</h2>
+
+		<div class="form-group">
+			<label for="client">Buscar cliente</label>
+			<input type="text" class="form-control" placeholder="Cliente" name="client" #client="ngModel" [(ngModel)]="searchClient.value" required>
+			<div *ngIf="client.touched && !searchClient.value" class="alert alert-danger" role="alert">
+				El cliente es requerido
+			</div>
+		</div>
+
+		<div class="form-check">
+			<input class="form-check-input" type="radio" name="name"  value="name"  checked #companyFalse="ngModel" [(ngModel)]="searchClient.key" required>
+			<label class="form-check-label" for="name">
+			Nombre
+			</label>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="radio" name="identification" value="identification" checked #identification="ngModel" [(ngModel)]="searchClient.key">
+			<label class="form-check-label" for="identification">
+			Identificacion
+			</label>
+		</div>
+		<br>
+
+		 <button type="submit" class="btn btn-primary" [disabled]="!clientForm.form.valid">Guardar</button>
+	</form>
+
+	<app-details-client *ngIf="success_client == true" [clientInRegistry]="this.client"></app-details-client>
+
+</section>
+
+<!--<div class="jumbotron" *ngIf="success_client == true">
+		<ul>
+			<li>Nombre: {{client.name}}</li>
+			<li>Apellido: {{client.surname}}</li>
+			<li>Identificacion: {{client.identification}}</li>
+			<li>Compañia</li>
+			<li>Persona natural</li>
+		</ul>
+
+		<button type="button" class="btn btn-warning">Editar</button>
+	</div>-->

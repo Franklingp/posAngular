@@ -1,8 +1,9 @@
 <br>
 
-<section class="jumbotron" *ngIf="success">
+<section class="jumbotron" *ngIf="success == true">
 
-	<h1>Detalles de {{client.name}} {{client.surname}}</h1>
+	<h1 *ngIf="!clientInRegistry">Detalles de {{client.name}} {{client.surname}}</h1>
+	<h1 *ngIf="clientInRegistry">{{client.name}} {{client.surname}}</h1>
 	<hr>
 	<ul>
 		<li>Nombre: {{client.name}}</li>
@@ -13,6 +14,8 @@
 	</ul>
 
 	<hr>
-	<button type="button" class="btn btn-warning" [routerLink]="['/clients/edit/', id]">Editar</button>
+	<button *ngIf="!clientInRegistry" type="button" class="btn btn-warning" [routerLink]="['/clients/edit/', id]">Editar</button>
+
+	<button *ngIf="clientInRegistry" type="button" class="btn btn-warning">Cambiar cliente</button>
 
 </section>

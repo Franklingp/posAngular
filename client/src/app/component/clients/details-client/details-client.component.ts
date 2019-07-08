@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ClientModel } from '../../../models/client.model';
 import { ClientService } from '../../../service/client.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -13,14 +13,28 @@ export class DetailsClientComponent implements OnInit {
 	public client: ClientModel;
 	public id: string;
 
+    @Input() clientInRegistry: ClientModel;
+
   constructor(	private _clientService: ClientService,
   				private _route: ActivatedRoute	) {
   	this.success = false;
   }
 
   ngOnInit() {
-  	this.getId();
-  	this.getClient();
+  	this.details();
+  	//this.getClient();
+  }
+
+  //Metodo para comprobar si es detalles o si es en registro
+  details(){
+    if(this.clientInRegistry){
+      this.client = this.clientInRegistry[0];
+      console.log(this.client);
+      this.success = true;
+    }else{
+      this.getId();
+      this.getClient();
+    }
   }
 
   //Metodo para obtener el id del cliente 

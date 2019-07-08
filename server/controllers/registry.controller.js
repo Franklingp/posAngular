@@ -217,13 +217,15 @@ var registryController = {
 	//Recoge un arreglo de ids de registros
 	getSet: function(req, res){
 		let registry = [String];
-		//registry = req.body.registry;
+		registry = req.body.registry;
 
+		/*
 		registry = [
                 "5d045c8e376523240c0666ce",
                 "5d09b2714534641ae1ac52d8",
                 "5d09b45f3f69cb1b7a334d8b"
             ];
+		*/
 
 		Registry.find({'_id': {$in: registry}}).sort("-date").exec((error, success) => {
 			return validate(error, success, res);
