@@ -13,9 +13,9 @@ import { ProductModel } from '../../../models/product.model';
   styleUrls: ['./add-registry.component.css']
 })
 export class AddRegistryComponent implements OnInit {
-	public client: any;
+	public clientToBuy: any;
 	public products: [ProductModel];
-	public success_client: boolean;
+	public success_client: number;
 	public success_products: boolean;
 
 		//Busqueda de cliente
@@ -27,7 +27,7 @@ export class AddRegistryComponent implements OnInit {
   constructor(	private _registryService: RegistryService,
   				private _inventoryService: InventoryService,
   				private _clientService: ClientService	) {
-  	this.success_client = false;
+  	this.success_client = 0;
   	this.success_products = false;
   	this.searchClient = {key: "", value: ""};
   	//this.client = new ClientModel("","",null,null,[""]);
@@ -36,21 +36,31 @@ export class AddRegistryComponent implements OnInit {
   ngOnInit() {
   }
 
-  //Metodo para buscar un cliente
+  //Metodo para buscar un cliente por nombre o identificacion
   getClient(){
   	this._clientService.getBy(this.searchClient).subscribe(
   		response => {
+			this.clientToBuy = response;
+			this.clientToBuy = this.clientToBuy.Client;
   			console.log(response);
-  			this.client = response;
-  			this.client = this.client.Client;
-  			console.log(this.client);
-  			this.success_client = true;
-
+  			console.log(this.clientToBuy);
+  			this.success_client = 1;
   		},
   		error => {
   			console.log(<any>error);
   			alert("Ha ocurrido un error al intentar encotrar el cliente");
+  			this.success_client = -1;
   		}
   	);
   }
+
+  //Metodo para capturar el cliente seleccionado de el componente hijo
+  select(event){
+  	this.clientToBuy = event;
+  	//console.log(event);
+  	console.log(this.clientToBuy)
+  	this.success_client = 2;
+  }
 }
+
+

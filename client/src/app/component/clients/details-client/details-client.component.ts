@@ -28,7 +28,8 @@ export class DetailsClientComponent implements OnInit {
   //Metodo para comprobar si es detalles o si es en registro
   details(){
     if(this.clientInRegistry){
-      this.client = this.clientInRegistry[0];
+      console.log(this.clientInRegistry);
+      this.client = this.clientInRegistry;
       console.log(this.client);
       this.success = true;
     }else{

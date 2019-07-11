@@ -8,7 +8,7 @@
 	<!--Seccion para buscar el cliente-->
 	<br>
 	
-	<form *ngIf="success_client == false" #clientForm="ngForm" (ngSubmit)="getClient()">
+	<form *ngIf="success_client == 0" #clientForm="ngForm" (ngSubmit)="getClient()">
 		<h2>Cliente</h2>
 
 		<div class="form-group">
@@ -33,21 +33,19 @@
 		</div>
 		<br>
 
-		 <button type="submit" class="btn btn-primary" [disabled]="!clientForm.form.valid">Guardar</button>
+		 <button type="submit" class="btn btn-primary" [disabled]="!clientForm.form.valid">Buscar</button>
 	</form>
 
-	<app-details-client *ngIf="success_client == true" [clientInRegistry]="this.client"></app-details-client>
+	<!--Seccion que muestra listado de clientes que coinciden con la busqueda-->
+	<div class="jumbotron" *ngIf="success_client == 1">
+		<app-get-clients  [listClients]="this.clientToBuy" (selectClient)="select($event)"></app-get-clients>
+	</div>
+
+	<!--Seccion de detalles del cliente seleccionado-->
+	<app-details-client *ngIf="success_client == 2" [clientInRegistry]="this.clientToBuy"></app-details-client>
+
+	
+
 
 </section>
 
-<!--<div class="jumbotron" *ngIf="success_client == true">
-		<ul>
-			<li>Nombre: {{client.name}}</li>
-			<li>Apellido: {{client.surname}}</li>
-			<li>Identificacion: {{client.identification}}</li>
-			<li>Compañia</li>
-			<li>Persona natural</li>
-		</ul>
-
-		<button type="button" class="btn btn-warning">Editar</button>
-	</div>-->

@@ -1,32 +1,34 @@
 <!--Seccion donde se encuentra el listado completo de productos-->
 <br>
-<h1>Clientes registrados</h1>
+<h1 *ngIf="!listClients">Clientes registrados</h1>
+<h2 *ngIf="listClients">Seleccionar cliente</h2>
 <div  *ngIf="success">
+	<table class="table table-hover">
 
-<table class="table table-hover">
-
-	<thead>
-		<!--Cabecera de tabla-->
-		<tr>
-			<th scope="col">#</th>
-			<th scope="col">Nombre</th>
-			<th scope="col">Apellido</th>
-			<th scope="col">Identificacion</th>
-			<th scope="col">Compañia</th>
-		</tr>
-	</thead>
+		<thead>
+			<!--Cabecera de tabla-->
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Apellido</th>
+				<th scope="col">Identificacion</th>
+				<th scope="col">Compañia</th>
+			</tr>
+		</thead>
 
 
-		<!--Cuerpo de la tabla      *ngIf="peticion_succeful"-->
-	<tbody> 
-		<tr *ngFor="let client of clients; let indice = index">
-			<th scope="row">{{indice}}</th>
-			<td><a  [routerLink]="['/clients/details/', client._id]">{{client.name}}</a></td>
-			<td>{{client.surname}}</td>
-			<td>{{client.identification}}</td>
-			<td *ngIf="client.company">Compañia</td>
-			<td *ngIf="!client.company">Persona natural</td>
-		</tr>
-	</tbody>
-</table>
+			<!--Cuerpo de la tabla      *ngIf="peticion_succeful"-->
+		<tbody> 
+			<tr *ngFor="let client of clients; let indice = index">
+				<th scope="row">{{indice}}</th>
+				<td *ngIf="!listClients"><a  [routerLink]="['/clients/details/', client._id]">{{client.name}}</a></td>
+				<td *ngIf="listClients"><a>{{client.name}}</a></td>
+				<td>{{client.surname}}</td>
+				<td>{{client.identification}}</td>
+				<td *ngIf="client.company">Compañia</td>
+				<td *ngIf="!client.company">Persona natural</td>
+				<td *ngIf="listClients"><button class="btn btn-primary" (click)="select(client, $event)">Seleccionar</button></td>
+			</tr>
+		</tbody>
+	</table>
 </div>

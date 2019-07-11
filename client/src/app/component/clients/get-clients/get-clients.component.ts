@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ClientModel } from '../../../models/client.model';
 import { ClientService } from '../../../service/client.service';
 
@@ -11,13 +11,16 @@ export class GetClientsComponent implements OnInit {
 	public success: boolean;
 	public clients: [ClientModel];
 
+    @Input() listClients: [ClientModel];
+    @Output() selectClient= new EventEmitter();
+
   constructor(	private _clientService: ClientService	) {
   	this.success = false;
   }
 
   ngOnInit() {
   	this.test();
-  	this.getClients();
+  	this.verificar();
   }
 
   //Metodo de prueba para comprobar conexion con el servidor
@@ -45,5 +48,23 @@ export class GetClientsComponent implements OnInit {
   			console.log(<any>error);
   		}
   	);
+  }
+
+  //Metodo que verifica si buscamos el listado completo o el de ciertos clientes (cuando se realiza una compra)
+  verificar(){
+    if(this.listClients){
+        this.clients = this.listClients;
+        console.log(this.clients);
+        this.success = true;
+      }else{
+        this.getClients();
+      }
+  }
+
+  //Metodo para retornar el cliente seleccionado a la seccion de compras
+  select(client, event){
+    console.log(event);
+    console.log(client);
+    this.selectClient.emit(client);
   }
 }
