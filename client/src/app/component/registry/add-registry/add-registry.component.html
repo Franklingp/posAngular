@@ -7,7 +7,6 @@
 
 	<!--Seccion para buscar el cliente-->
 	<br>
-	
 	<form *ngIf="success_client == 0" #clientForm="ngForm" (ngSubmit)="getClient()">
 		<h2>Cliente</h2>
 
@@ -15,7 +14,7 @@
 			<label for="client">Buscar cliente</label>
 			<input type="text" class="form-control" placeholder="Cliente" name="client" #client="ngModel" [(ngModel)]="searchClient.value" required>
 			<div *ngIf="client.touched && !searchClient.value" class="alert alert-danger" role="alert">
-				El cliente es requerido
+				El cliente es requerido para realizar la busqueda
 			</div>
 		</div>
 
@@ -42,10 +41,111 @@
 	</div>
 
 	<!--Seccion de detalles del cliente seleccionado-->
-	<app-details-client *ngIf="success_client == 2" [clientInRegistry]="this.clientToBuy"></app-details-client>
+	<app-details-client *ngIf="success_client == 2" [clientInRegistry]="this.clientToBuy" (changeClient)="change()"></app-details-client>
+	<br>
 
 	
 
+	<!--Seccion para agregar un producto para comprar-->
+	<hr>
+	<div>
+		<form #productForm="ngForm" (ngSubmit)="getClient()" (ngSubmit)="getProduct()">
+		<h2>Prouctos</h2>
+
+		<div class="form-group">
+			<label for="product">Buscar producto</label>
+			<input type="text" class="form-control" placeholder="Producto" name="product" #product="ngModel" [(ngModel)]="searchProduct.value" required>
+			<div *ngIf="product.touched && !searchProduct.value" class="alert alert-danger" role="alert">
+				El producto es requerido para realizar la busqueda
+			</div>
+		</div>
+
+		<!--Seccion que lista la busqueda de los productos para seleccionarlos y agrgearlos a la lis-ta de compra  active-->
+		<div class="list-group" *ngIf="success_products == 1">
+			<div *ngFor="let product of products_to_select">
+			  <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" (click)="SelectProduct(product)">
+			    <span>{{product.name}}</span>
+			    <span>{{product.brand}}</span>
+			    <span>{{product.quantity}}</span>
+			    <span>{{product.category}}</span>
+			    <span>{{product.price}}</span>
+			  </button>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="quantity">Cantidad</label>
+			<input type="number" class="form-control" placeholder="Cantidad" name="quantity" #quantity="ngModel" [(ngModel)]="searchProduct.quantity" required>
+			<div *ngIf="quantity.touched && !searchProduct.quantity" class="alert alert-danger" role="alert">
+				El producto es requerido para realizar la busqueda
+			</div>
+		</div>
+
+		<!--Seccion donde se selecciona el producto que se quiere agregar-->
+		<div class="form-check">
+			<input class="form-check-input" type="radio" name="id"  value="id"  checked #searchId="ngModel" [(ngModel)]="searchProduct.key" required>
+			<label class="form-check-label" for="id">
+			Id
+			</label>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="radio" name="name"  value="name"  checked #searchName="ngModel" [(ngModel)]="searchProduct.key">
+			<label class="form-check-label" for="name">
+			Nombre
+			</label>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="radio" name="brand" value="brand" checked #searchBrand="ngModel" [(ngModel)]="searchProduct.key">
+			<label class="form-check-label" for="brand">
+			Marca
+			</label>
+		</div>
+		<br>
+
+		 <button type="submit" class="btn btn-primary" [disabled]="!productForm.form.valid">Buscar</button>
+	</form>
+
+	<!--Seccion para mostrar los productos seleccionados-->
+	<div>
+	<br>
+		<h2>Lista de compra</h2>
+
+		<table  class="table table-hover">
+			<thead>
+				<!--Cabecera de tabla-->
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Marca</th>
+					<th scope="col">Categoria</th>
+					<th scope="col">Cantidad</th>
+					<th scope="col">Precio</th>
+					<th scope="col">Precio total</th>
+
+				</tr>
+			</thead>
+
+
+				<!--Cuerpo de la tabla      *ngIf="peticion_succeful"-->
+			<tbody *ngIf="success_products == 2 || success_products == 1"> 
+				<tr *ngFor="let product of products; let indice = index">
+					<th scope="row">{{indice}}</th>
+					<td>{{product.name}}</td>
+					<td>{{product.brand}}</td>
+					<td>{{product.category}}</td>
+					<td>{{product.quantity}}</td>
+					<td>{{product.price}}</td>
+					<td>{{product.quantity * product.price}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<hr>
+		<h2>Precio total: ${{registry.total_price}}</h2>
+	</div>
+	</div>
+
+	<br>
+	<button class="btn btn-primary" [disabled]="">Registrar compra</button>
 
 </section>
 

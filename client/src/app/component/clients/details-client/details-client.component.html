@@ -1,5 +1,6 @@
-<br>
+<!--Seccion de detalles de un cliente-->
 
+<br>
 <section class="jumbotron" *ngIf="success == true">
 
 	<h1 *ngIf="!clientInRegistry">Detalles de {{client.name}} {{client.surname}}</h1>
@@ -16,6 +17,7 @@
 	<hr>
 	<button *ngIf="!clientInRegistry" type="button" class="btn btn-warning" [routerLink]="['/clients/edit/', id]">Editar</button>
 
-	<button *ngIf="clientInRegistry" type="button" class="btn btn-warning">Cambiar cliente</button>
+	<!--En caso de que este en Compra y se quiera cambiar el cliente-->
+	<button *ngIf="clientInRegistry" type="button" class="btn btn-warning" (click)="change($event)">Cambiar cliente</button>
 
 </section>

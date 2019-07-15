@@ -42,7 +42,7 @@ export class GetClientsComponent implements OnInit {
   			
   			this.clients = response.Client;
   			this.success = true;
-  			console.log(this.clients);
+  		//	console.log(this.clients);
   		},
   		error => {
   			console.log(<any>error);
@@ -63,8 +63,8 @@ export class GetClientsComponent implements OnInit {
 
   //Metodo para retornar el cliente seleccionado a la seccion de compras
   select(client, event){
-    console.log(event);
-    console.log(client);
+   // console.log(event);
+    //console.log(client);
     this.selectClient.emit(client);
   }
 }

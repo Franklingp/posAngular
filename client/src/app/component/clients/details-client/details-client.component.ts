@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ClientModel } from '../../../models/client.model';
 import { ClientService } from '../../../service/client.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -14,6 +14,7 @@ export class DetailsClientComponent implements OnInit {
 	public id: string;
 
     @Input() clientInRegistry: ClientModel;
+    @Output() changeClient = new EventEmitter();
 
   constructor(	private _clientService: ClientService,
   				private _route: ActivatedRoute	) {
@@ -28,9 +29,9 @@ export class DetailsClientComponent implements OnInit {
   //Metodo para comprobar si es detalles o si es en registro
   details(){
     if(this.clientInRegistry){
-      console.log(this.clientInRegistry);
+      //console.log(this.clientInRegistry);
       this.client = this.clientInRegistry;
-      console.log(this.client);
+     //console.log(this.client);
       this.success = true;
     }else{
       this.getId();
@@ -42,7 +43,7 @@ export class DetailsClientComponent implements OnInit {
   getId(){
   	this._route.params.subscribe(
   		response => {
-  			console.log(response);
+  			//console.log(response);
   			this.id = response.id;
   		}
   	);
@@ -53,12 +54,17 @@ export class DetailsClientComponent implements OnInit {
   	this._clientService.getOne(this.id).subscribe(
   		response => {
   			this.client = response.Client;
-  			console.log(this.client);
+  			//console.log(this.client);
   			this.success = true;
   		},
   		error => { 
   			console.log(<any>error);
   		}
   	);
+  }
+
+  //Metodo para cambiar el cliente seleccionado de una compra 
+  change(event){
+    this.changeClient.emit();
   }
 }

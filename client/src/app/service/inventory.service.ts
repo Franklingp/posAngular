@@ -55,4 +55,10 @@ export class InventoryService {
 			return this._http.put(this.url+"/disable/"+id, {headers: headers});
 		}
 	}
+
+	//Metodo para obtener un producto mediante el nombre o la marca
+	getProductBy(params): Observable<any>{
+		let headers = new HttpHeaders().set("Content-Type", "application/json");
+		return this._http.post(this.url+"/get-by", params, {headers: headers});
+	}
 }
