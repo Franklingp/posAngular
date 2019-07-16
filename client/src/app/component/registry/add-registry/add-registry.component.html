@@ -136,6 +136,7 @@
 					<td>{{product.quantity}}</td>
 					<td>{{product.price}}</td>
 					<td>{{product.quantity * product.price}}</td>
+					<button *ngIf="product.name" type="button" class="btn btn-warning btn-list" (click)="removeProduct(indice)">Remover</button>
 				</tr>
 			</tbody>
 		</table>
@@ -145,7 +146,7 @@
 	</div>
 
 	<br>
-	<button class="btn btn-primary" [disabled]="">Registrar compra</button>
+	<button class="btn btn-primary" [disabled]="!this.client || this.products[0].name == '' || this.products.length == 0">Realizar Compra</button>
 
 </section>
 

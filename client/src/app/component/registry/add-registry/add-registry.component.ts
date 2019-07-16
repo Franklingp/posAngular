@@ -40,7 +40,7 @@ export class AddRegistryComponent implements OnInit {
   	this.success_client = 0;
   	this.success_products = 0;
   	this.searchClient = {key: "", value: ""};
-  	this.searchProduct = {key: "", value: "", quantity: 0};
+  	this.searchProduct = {key: "", value: "", quantity: null};
 
   	this.registry = new RegistryModel({id:"" ,name:"" ,surname:"" ,identification:null }, "" ,0 , [{id: '',name: '', brand: '', price:null ,quantity:null}]);
 
@@ -94,7 +94,6 @@ export class AddRegistryComponent implements OnInit {
   	if(this.searchProduct.key == 'id'){
   		this._inventoryService.getProduct(this.searchProduct.value).subscribe(
   			response => {
-
   				if(this.products[0].name == ""){
   					this.products[0] = response.Product;
   					console.log(this.products);  
@@ -146,6 +145,14 @@ export class AddRegistryComponent implements OnInit {
 		this.registry.total_price = this.registry.total_price + (product.quantity * product.price);
 		this.success_products = 2;
   	}
+  }
+
+  //Metodo para eliminar un producto de la lista de compra
+  removeProduct(index){
+  	//index = index -1;
+  	this.registry.total_price = this.registry.total_price - (this.products[index].price * this.products[index].quantity);
+  	this.products.splice(index, 1);
+  	this.success_products == 2;
   }
 }
 
