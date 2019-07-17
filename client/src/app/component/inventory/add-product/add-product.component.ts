@@ -14,7 +14,7 @@ export class AddProductComponent implements OnInit {
   public id: string;
 
   constructor(	private _inventoryService: InventoryService	) {
-  	this.product = new ProductModel("","",null,"","",null,true,[""]);
+  	this.product = new ProductModel("","","",null,"","",null,true,[""]);
     this.success = 0;
   }
 

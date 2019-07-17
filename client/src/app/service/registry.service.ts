@@ -30,4 +30,10 @@ export class RegistryService {
     let headers = new HttpHeaders().set("Content-Type", "application/json");
     return this._http.get(this.url+"/get/"+id, {headers: headers});
   }
+
+  //Metodo para agregar un nuevo registro a la base de datos
+  addRegistry(registry){
+    let headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this._http.post(this.url+"/add", registry, {headers: headers});
+  }
 }

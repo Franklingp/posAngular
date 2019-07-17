@@ -44,7 +44,7 @@ export class AddRegistryComponent implements OnInit {
 
   	this.registry = new RegistryModel({id:"" ,name:"" ,surname:"" ,identification:null }, "" ,0 , [{id: '',name: '', brand: '', price:null ,quantity:null}]);
 
-  	this.products = [{name:"" ,brand:"" , price: null, description: "", category: "", quantity: null, enabled: null, registryId: [""]}];
+  	this.products = [{_id: "",name:"" ,brand:"" , price: null, description: "", category: "", quantity: null, enabled: null, registryId: [""]}];
   }
 
   ngOnInit() {
@@ -151,9 +151,55 @@ export class AddRegistryComponent implements OnInit {
   removeProduct(index){
   	//index = index -1;
   	this.registry.total_price = this.registry.total_price - (this.products[index].price * this.products[index].quantity);
-  	this.products.splice(index, 1);
+  	if(this.products.length == 1){
+  		this.products[0] = {_id: "",name:"" ,brand:"" , price: null, description: "", category: "", quantity: null, enabled: null, registryId: [""]};
+  	}else{
+  		this.products.splice(index, 1);
+	}
   	this.success_products == 2;
   }
+
+  //Metodo para guardar todos los datos de la compra en la base de datos
+  addRegistry(){
+
+  	this.registry.client.name = this.clientToBuy.name;
+  	this.registry.client.surname = this.clientToBuy.surname;
+  	this.registry.client.identification = this.clientToBuy.identification;
+  	this.registry.client.id = this.clientToBuy._id;
+
+	let auxiliar = {id: '',name: '', brand: '', price:null ,quantity:null};
+
+  	for(let index in this.products){
+
+  		if(index == 0){
+		  	this.registry.products[0].name = this.products[0].name;
+			this.registry.products[0].brand = this.products[0].brand;
+			this.registry.products[0].price = this.products[0].price;
+			this.registry.products[0].id = this.products[0]._id;
+			this.registry.products[0].quantity = this.products[0].quantity;
+			continue;
+  		}
+  		auxiliar = {id: '',name: '', brand: '', price:null ,quantity:null};
+  		auxiliar.id = this.products[index]._id;
+  		auxiliar.name = this.products[index].name;
+  		auxiliar.brand = this.products[index].brand;
+  		auxiliar.price = this.products[index].price;
+  		auxiliar.quantity = this.products[index].quantity;
+
+  		this.registry.products.push(auxiliar);
+  	}
+
+  	this.registry.date = "01/02/1999";
+  	//console.log(this.registry);
+  	
+  	this._registryService.addRegistry(this.registry).subscribe(
+  		response => {
+  			console.log(response);
+  		},
+  		error => {
+  			console.log(<any>error);
+  			alert(error);
+  		}
+  	); 
+  }
 }
-
-

@@ -7,6 +7,7 @@ export class ProductModel{
 	//Modelo que continene todos los datos de un producto
 
 	constructor(
+		public _id: string,
 		public name: string,
 		public brand: string,
 		public price: number,
