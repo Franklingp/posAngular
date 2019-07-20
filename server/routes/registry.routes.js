@@ -11,6 +11,6 @@ router.post("/add", registryController.add);
 router.get("/get/:id", registryController.getRegistry);
 router.get("/get", registryController.getAll);
 router.delete("/delete/:id", registryController.delete);
-router.get("/get-set", registryController.getSet);
+router.post("/get-set", registryController.getSet);
 
 module.exports = router;

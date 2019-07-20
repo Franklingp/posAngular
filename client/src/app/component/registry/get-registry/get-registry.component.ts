@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RegistryModel } from '../../../models/registry.model';
 import { RegistryService } from '../../../service/registry.service';
 
@@ -12,12 +12,13 @@ export class GetRegistryComponent implements OnInit {
 	public success: boolean;
 
   constructor(	private _registryService: RegistryService	) {
-  	this.success = false;
+  	this.success = null;
   }
 
+  @Input() arrayRegistry: string[];
+
   ngOnInit() {
-  	this.test();
-    this.getRegistry();
+  	this.validate();
   }
 
   //Metodo de prueba para servidor
@@ -44,5 +45,32 @@ export class GetRegistryComponent implements OnInit {
         console.log(<any>error);
       }
     )
+  }
+
+  //Metodo para validar en caso de que sea si se requiere todo el inventario o solo ciertos registros
+  validate(){
+    if(this.arrayRegistry){
+      this._registryService.getSet(this.arrayRegistry).subscribe(
+        response => {
+          let aux: any;
+          aux = response;
+          aux = aux.Registry;
+          this.registry = aux;
+          console.log(this.registry);
+          this.success = true;
+        },
+        error =>{
+          if(!(this.arrayRegistry.length == 0)){
+             console.log(<any>error);
+             alert('Ha ocurrido un error al intentar obtener los registros relacionados a este cliente');
+          }
+          this.success = false;
+        }
+      );
+    }
+    else{
+      this.test();
+      this.getRegistry();
+    }
   }
 }

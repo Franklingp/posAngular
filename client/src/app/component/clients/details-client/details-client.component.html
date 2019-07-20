@@ -20,4 +20,7 @@
 	<!--En caso de que este en Compra y se quiera cambiar el cliente-->
 	<button *ngIf="clientInRegistry" type="button" class="btn btn-warning" (click)="change($event)">Cambiar cliente</button>
 
+	<!--Seccion donde se muestra el -->
+	<hr>
+	<app-get-registry *ngIf="!clientInRegistry" [arrayRegistry]="this.client.registryId"></app-get-registry>
 </section>

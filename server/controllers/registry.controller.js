@@ -217,7 +217,7 @@ var registryController = {
 	//Recoge un arreglo de ids de registros
 	getSet: function(req, res){
 		let registry = [String];
-		registry = req.body.registry;
+		registry = req.body;
 
 		/*
 		registry = [

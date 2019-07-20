@@ -4,6 +4,12 @@
 	<h1>Lista de ventas registradas</h1>
 	<hr>
 
+	<!--En caso de que no haya registro-->
+	<div *ngIf="success == false" class="alert alert-warning" role="alert">
+			No se han encontrado ventas registradas.
+	</div>
+
+
 	<div class="list-group" *ngIf="success">
 		<div *ngFor="let purchase of registry">
 			<a data-toggle="collapse" href="#a{{purchase._id}}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">

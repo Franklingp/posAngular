@@ -170,7 +170,7 @@ export class AddRegistryComponent implements OnInit {
 	let auxiliar = {id: '',name: '', brand: '', price:null ,quantity:null};
 
   	for(let index in this.products){
-
+  		/*
   		if(index == 0){
 		  	this.registry.products[0].name = this.products[0].name;
 			this.registry.products[0].brand = this.products[0].brand;
@@ -178,7 +178,7 @@ export class AddRegistryComponent implements OnInit {
 			this.registry.products[0].id = this.products[0]._id;
 			this.registry.products[0].quantity = this.products[0].quantity;
 			continue;
-  		}
+  		} */
   		auxiliar = {id: '',name: '', brand: '', price:null ,quantity:null};
   		auxiliar.id = this.products[index]._id;
   		auxiliar.name = this.products[index].name;
@@ -189,6 +189,7 @@ export class AddRegistryComponent implements OnInit {
   		this.registry.products.push(auxiliar);
   	}
 
+  	this.registry.products.splice(0, 1);
   	this.registry.date = "01/02/1999";
   	//console.log(this.registry);
   	

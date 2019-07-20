@@ -36,4 +36,10 @@ export class RegistryService {
     let headers = new HttpHeaders().set("Content-Type", "application/json");
     return this._http.post(this.url+"/add", registry, {headers: headers});
   }
+
+  //Metodo para obtener un listado de registro enlazado a un producto o un cliente
+  getSet(params){
+    let headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this._http.post(this.url+"/get-set", params, {headers: headers});
+  }
 }
