@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { HomeComponent } from './component/home/home.component';
+
 import { GetInventoryComponent } from './component/inventory/get-inventory/get-inventory.component';
 import { AddProductComponent } from './component/inventory/add-product/add-product.component';
 import { EditProductComponent } from './component/inventory/edit-product/edit-product.component';
@@ -17,6 +19,10 @@ import { AddRegistryComponent } from './component/registry/add-registry/add-regi
 import { DetailRegistryComponent } from './component/registry/detail-registry/detail-registry.component';
 
 const routes: Routes = [
+	//home
+	{path: "", redirectTo: "home", pathMatch: 'full'},
+	{path: "home", component: HomeComponent},
+
 	//inventaro
 	{path: "inventory", component: GetInventoryComponent},
 	{path: "inventory/add", component: AddProductComponent},
